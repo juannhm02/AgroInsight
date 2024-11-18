@@ -1,0 +1,14 @@
+{
+  "name": "agroinsight",
+  "version": "1.0.0",
+  "description": "Aplicación de gestión ganadera AgroInsight",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "keywords": ["ganadería", "gestión", "Node.js", "React", "MongoDB"],
+  "author": "Juan Higuera Mohedano",
+  "license": "ISC"
+}
+
