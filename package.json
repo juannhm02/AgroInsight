@@ -7,8 +7,16 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js"
   },
-  "keywords": ["ganadería", "gestión", "Node.js", "React", "MongoDB"],
+  "keywords": [
+    "ganadería",
+    "gestión",
+    "Node.js",
+    "React",
+    "MongoDB"
+  ],
   "author": "Juan Higuera Mohedano",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7"
+  }
 }
-
