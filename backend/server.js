@@ -7,7 +7,9 @@ const bodyParser = require("body-parser");
 require("dotenv").config({ path: __dirname + "/.env" });
 dotenv.config();
 console.log("Environment variables loaded from .env file");
-console.log("Mongo URI:", process.env.MONGO_URI);
+if (process.env.NODE_ENV !== "production") {
+    console.log("Mongo URI:", process.env.MONGO_URI);
+}
 
 const app = express();
 const PORT = process.env.PORT || 5001;

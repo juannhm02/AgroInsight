@@ -15,7 +15,7 @@ const Home = () => (
           <Nav className="ms-auto">
             <Nav.Link href="/">Inicio</Nav.Link>
             <Nav.Link href="/servicios">Servicios</Nav.Link>
-            <Nav.Link href="/sobre">Sobre AgrI</Nav.Link>
+            <Nav.Link href="/sobre">Sobre AgroI</Nav.Link>
             <Nav.Link href="/contacto">Contacto</Nav.Link>
             <Nav.Link href="/perfil">
               <FaUserCircle size={24} />
@@ -26,9 +26,9 @@ const Home = () => (
     </Navbar>
 
     {/* Carrusel centrado y con tamaño fijo */}
-    <Container className="my-5 d-flex justify-content-center">
+    <Container className="my-5 d-flex justify-content-center" >
       <div style={{ maxWidth: '800px', width: '100%' }}>
-        <Carousel variant="dark">
+        <Carousel variant="white" className="rounded-3 shadow">
           <Carousel.Item>
             <img
               className="d-block w-100"
