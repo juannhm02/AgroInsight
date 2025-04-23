@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
-const App = () => {
-    useEffect(() => {
-        axios.get("http://localhost:5000")
-            .then((response) => console.log(response.data))
-            .catch((error) => console.error(error));
-    }, []);
-
-    return <div>Welcome to AgroInsight</div>;
-};
+const App = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+  </Routes>
+);
 
 export default App;
