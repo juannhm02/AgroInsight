@@ -1,5 +1,14 @@
 import React from "react";
-import { Container, Carousel } from "react-bootstrap";
+import TestimonialsCarousel from "../components/TestimonialsCarousel";
+import { Container, Carousel, Row, Col } from "react-bootstrap";
+import {
+  FaMapMarkedAlt,
+  FaChartLine,
+  FaClipboardList,
+  FaCloud,
+  FaSyncAlt,
+  FaFileImport,
+} from "react-icons/fa";
 
 const slides = [
   "/carrusel/Slide1.png",
@@ -10,11 +19,43 @@ const slides = [
   "/carrusel/Slide6.png",
 ];
 
+const features = [
+  {
+    icon: FaMapMarkedAlt,
+    title: "Gestiona tus rebaños",
+    desc: "Controla dónde ha pastado cada vaca y organiza tus explotaciones.",
+  },
+  {
+    icon: FaChartLine,
+    title: "Histórico de terneros",
+    desc: "Consulta cuántos terneros ha tenido cada vaca y su evolución.",
+  },
+  {
+    icon: FaClipboardList,
+    title: "Simplifica saneamientos",
+    desc: "Automatiza el papeleo al registrar saneamientos y tratamientos.",
+  },
+  {
+    icon: FaCloud,
+    title: "A la nube",
+    desc: "Tus datos guardados en la nube, accesibles desde cualquier sitio.",
+  },
+  {
+    icon: FaSyncAlt,
+    title: "Modo Offline",
+    desc: "Sigue trabajando sin conexión: se sincroniza cuando vuelvas online.",
+  },
+  {
+    icon: FaFileImport,
+    title: "Importa y exporta",
+    desc: "Lee y exporta informes en Excel con un clic.",
+  },
+];
+
 const Home = () => (
   <>
     {/* Carrusel + imagen lateral, centrados */}
     <Container className="my-5 d-flex justify-content-center align-items-center">
-      {/* Wrapper del carrusel */}
       <div className="carousel-wrapper me-4">
         <Carousel
           variant="white"
@@ -31,45 +72,40 @@ const Home = () => (
           ))}
         </Carousel>
       </div>
-      {/* Imagen lateral */}
       <div className="side-image-wrapper">
-        <img
-          src="/prueba.png"
-          alt="AgroInsight"
-          className="img-fluid"
-        />
+        <img src="/home.png" alt="AgroInsight" className="img-fluid side-img" />
       </div>
     </Container>
 
-    {/* Texto y logo */}
+    {/* Sección "Qué ofrece AgroInsight" */}
     <Container className="py-5">
-      <div className="row">
-        <div className="col-md-8">
-          <p className="fs-5">
-            Si estás cansado/a de no saber dónde apuntas todos tus trámites
-            ganaderos … AgroInsight es tu sitio web, en un solo lugar y al
-            alcance de tu mano en todo momento……
-          </p>
-          <ul className="list-unstyled ps-3">
-            <li>
-              • AgroInsight integra módulos de administración ganadera,
-              cinegética y monitoreo en tiempo real de tu ganado.
-            </li>
-            <li>
-              • Controla ingresos y gastos de la explotación con nuestro
-              módulo económico de fácil uso.
-            </li>
-          </ul>
-        </div>
-        <div className="col-md-4 text-center">
+      <h2 className="text-center mb-4">Qué ofrece <span className="feature-text-title">AgroInsight</span></h2>
+      <Row className="g-4 justify-content-center">
+        {features.map(({ icon: Icon, title, desc }, i) => (
+          <Col key={i} xs={12} md={4} className="text-center">
+            <Icon className="feature-icon mb-2" />
+            <h5 className="feature-title">{title}</h5>
+            <p className="feature-desc">{desc}</p>
+          </Col>
+        ))}
+      </Row>
+    </Container>
+    {/* Sección "¿Nuestros ganaderos" */}
+    <Container className="py-5">
+      <h2 className="text-center mb-4">Lo que dicen nuestros <span className="feature-text-title">ganaderos</span></h2>
+      <Row className="align-items-center">
+        <Col md={6}>
+          <TestimonialsCarousel />
+        </Col>
+        <Col md={6} className="text-center">
           <img
-            src="/home.png"
+            src="/splice.png"
             alt="AgroInsight"
-            className="img-fluid mb-3"
+            className="img-fluid side-last-img"
+            style={{ borderRadius: "15px" }} // Bordes redondeados
           />
-          <p className="mt-2">Gestión ganadera inteligente</p>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </Container>
   </>
 );

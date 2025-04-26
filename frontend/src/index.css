@@ -46,6 +46,18 @@ body {
   object-fit: contain;
 }
 
+/* Ajusta la imagen para que tenga bordes redondeados */
+.side-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px; /* Ajusta el valor según el nivel de redondeo deseado */
+}
+.side-last-img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 15px; /* Ajusta el valor según el nivel de redondeo deseado */
+}
+
 /* Nav pills excepto perfil */
 .navbar-nav .nav-link:not(.profile-link) {
   display: inline-block;
@@ -76,4 +88,74 @@ body {
 /* Lista sin puntos */
 .list-unstyled li {
   margin-bottom: 0.5rem;
+}
+
+/* Sección de features */
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--secondary);
+}
+.feature-title {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+.feature-desc {
+  color: var(--black);
+  font-size: 0.95rem;
+}
+
+.feature-text-title {
+  font-size: 2.5rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* posiciona los dots un poco más abajo dentro del círculo */
+.carousel-indicators {
+  bottom: 8%;
+}
+
+/* convierte los indicadores en círculos y usa tu paleta */
+.carousel-indicators li {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary);
+}
+
+/* el activo destaca con tu color primario */
+.carousel-indicators .active {
+  background-color: var(--primary);
+}
+
+
+/* tamaño y posición de indicadores */
+.testimonials-carousel .carousel-indicators {
+  bottom: 0.5rem;
+}
+.testimonials-carousel .carousel-indicators li {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary);
+}
+.testimonials-carousel .carousel-indicators .active {
+  background-color: var(--primary);
+}
+
+/* flechas blancas sobre fondo oscuro */
+.testimonials-carousel .carousel-control-prev-icon,
+.testimonials-carousel .carousel-control-next-icon {
+  filter: invert(1);
+}
+
+/* altura mínima para que el contenido nunca se desplace verticalmente */
+.testimonials-carousel .carousel-item {
+  min-height: 180px;
+}
+
+/* Ajusta el carrusel para que ocupe todo el espacio disponible */
+.testimonials-carousel {
+  max-width: 100%;
 }
