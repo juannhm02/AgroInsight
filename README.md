@@ -65,6 +65,7 @@ AgroInsight es una plataforma web integral de gestión ganadera que permite a lo
 
 ## 📁 Estructura de carpetas
 
+```bash
 AgroInsight/
 ├─ backend/           # API REST con Node.js & Express
 │  ├─ models/         # Esquemas de Mongoose
@@ -80,6 +81,7 @@ AgroInsight/
 │  │  └─ index.css    # Estilos globales
 │  └─ package.json
 └─ README.md          # (este archivo)
+```
 
 
 ## 📝 Licencia
@@ -88,5 +90,5 @@ Este proyecto está bajo la Licencia MIT.
 
 ## ✉️ Contacto
 
-Juan Higuera Mohedano – i02himoj@uco.es
-Proyecto TFG – Universidad de Córdoba
+- Juan Higuera Mohedano – i02himoj@uco.es
+- Proyecto TFG – Universidad de Córdoba
