@@ -1,102 +1,72 @@
 import React from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
-import Carousel from "react-bootstrap/Carousel";
-import { FaUserCircle } from "react-icons/fa";
+import { Container, Carousel } from "react-bootstrap";
+
+const slides = [
+  "/carrusel/Slide1.png",
+  "/carrusel/Slide2.png",
+  "/carrusel/Slide3.png",
+  "/carrusel/Slide4.png",
+  "/carrusel/Slide5.png",
+  "/carrusel/Slide6.png",
+];
 
 const Home = () => (
   <>
-    <Navbar bg="success" variant="dark" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">
-          <img src="/LOGO_white.png" height="30" alt="AgroInsight" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="main-nav" />
-        <Navbar.Collapse id="main-nav">
-          <Nav className="ms-auto">
-            <Nav.Link href="/">Inicio</Nav.Link>
-            <Nav.Link href="/servicios">Servicios</Nav.Link>
-            <Nav.Link href="/sobre">Sobre AgroI</Nav.Link>
-            <Nav.Link href="/contacto">Contacto</Nav.Link>
-            <Nav.Link href="/perfil">
-              <FaUserCircle size={24} />
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
-    {/* Carrusel centrado y con tamaño fijo */}
-    <Container className="my-5 d-flex justify-content-center" >
-      <div style={{ maxWidth: '800px', width: '100%' }}>
-        <Carousel variant="white" className="rounded-3 shadow">
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/carrusel/Slide1.jpg"
-              alt="Slide 1"
-              style={{ height: '400px', objectFit: 'cover' }}
-            />
-            <Carousel.Caption className="text-white">
-              <p>Utilizamos tecnología avanzada para monitorear la salud y bienestar de tu ganado</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/carrusel/Slide2.jpg"
-              alt="Slide 2"
-              style={{ height: '400px', objectFit: 'cover' }}
-            />
-            <Carousel.Caption className="text-white">
-              <p>Optimiza el uso de tus pastos para maximizar la producción y sostenibilidad</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/carrusel/Slide3.jpg"
-              alt="Slide 3"
-              style={{ height: '400px', objectFit: 'cover' }}
-            />
-            <Carousel.Caption className="text-white">
-              <p>Obtén tantas facilidades como necesites en el control de cinegética</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/carrusel/Slide4.jpg"
-              alt="Slide 4"
-              style={{ height: '400px', objectFit: 'cover' }}
-            />
-            <Carousel.Caption className="text-white">
-                <p>Mejora la trazabilidad de tus productos ganaderos con nuestra plataforma</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/carrusel/Slide5.jpg"
-              alt="Slide 5"
-              style={{ height: '400px', objectFit: 'cover' }}
-            />
-            <Carousel.Caption className="text-white">
-              <p>Con AgroInsight, tu ganado está en las mejores manos</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+    {/* Carrusel + imagen lateral, centrados */}
+    <Container className="my-5 d-flex justify-content-center align-items-center">
+      {/* Wrapper del carrusel */}
+      <div className="carousel-wrapper me-4">
+        <Carousel
+          variant="white"
+          className="border border-secondary custom-carousel-border rounded-3 overflow-hidden shadow"
+        >
+          {slides.map((src, idx) => (
+            <Carousel.Item key={idx}>
+              <img
+                className="d-block w-100 carousel-img"
+                src={src}
+                alt={`Slide ${idx + 1}`}
+              />
+            </Carousel.Item>
+          ))}
         </Carousel>
+      </div>
+      {/* Imagen lateral */}
+      <div className="side-image-wrapper">
+        <img
+          src="/prueba.png"
+          alt="AgroInsight"
+          className="img-fluid"
+        />
       </div>
     </Container>
 
+    {/* Texto y logo */}
     <Container className="py-5">
       <div className="row">
         <div className="col-md-8">
           <p className="fs-5">
-            Si estás cansado/a de no saber dónde apuntas todos tus trámites ganaderos ... AgroInsight es tu sitio web, en un solo lugar y al alcance de tu mano en todo momento......
+            Si estás cansado/a de no saber dónde apuntas todos tus trámites
+            ganaderos … AgroInsight es tu sitio web, en un solo lugar y al
+            alcance de tu mano en todo momento……
           </p>
+          <ul className="list-unstyled ps-3">
+            <li>
+              • AgroInsight integra módulos de administración ganadera,
+              cinegética y monitoreo en tiempo real de tu ganado.
+            </li>
+            <li>
+              • Controla ingresos y gastos de la explotación con nuestro
+              módulo económico de fácil uso.
+            </li>
+          </ul>
         </div>
         <div className="col-md-4 text-center">
-          <img src="/home.png" alt="AgroInsight" className="img-fluid" />
+          <img
+            src="/home.png"
+            alt="AgroInsight"
+            className="img-fluid mb-3"
+          />
           <p className="mt-2">Gestión ganadera inteligente</p>
         </div>
       </div>

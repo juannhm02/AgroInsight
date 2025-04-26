@@ -3,11 +3,77 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Paleta global */
+:root {
+  --primary: #1a4c28;
+  --secondary: #368d44;
+  --white: #ffffff;
+  --black: #000000;
+  --grey-light: #c4c4c4;
+  --text: var(--black);
+}
+
+/* Overrides Bootstrap */
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+.border-secondary {
+  border-color: var(--secondary) !important;
+}
+
+/* Carrusel border personalizado */
+.custom-carousel-border {
+  border-width: 8px !important;
+}
+
+/* Wrapper centrado y ancho máximo para el carrusel */
+.carousel-wrapper {
+  max-width: 700px;
+}
+
+/* Mantener ratio 3:2 y recortar con cover */
+.carousel-img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+/* Imagen lateral: limitar altura para que no sobrepase el carrusel */
+.side-image-wrapper img {
+  max-height: calc((700px * 2) / 3); /* mantiene 3:2 relativo al max-width */
+  object-fit: contain;
+}
+
+/* Nav pills excepto perfil */
+.navbar-nav .nav-link:not(.profile-link) {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 50rem;
+  background-color: var(--secondary);
+  color: var(--white) !important;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.navbar-nav .nav-link:not(.profile-link):hover {
+  background-color: var(--primary);
+  transform: translateY(-2px);
+}
+/* Perfil icon blanco y lift on hover */
+.navbar-nav .nav-link.profile-link {
+  color: var(--white) !important;
+}
+.navbar-nav .nav-link.profile-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Caption en blanco */
+.carousel-caption {
+  color: var(--white) !important;
+}
+
+/* Lista sin puntos */
+.list-unstyled li {
+  margin-bottom: 0.5rem;
 }
