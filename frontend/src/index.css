@@ -197,3 +197,15 @@ body {
   max-width: 800px; /* Ajusta el ancho deseado */
   width: 90%; /* Opcional: para que sea responsivo */
 }
+
+/* ========== Abrir dropdown “Servicios” al pasar el ratón ========== */
+
+/* Cuando el nav-item.dropdown esté en hover, forzamos el menú visible */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Quitamos el pequeño gap que Bootstrap metería al abrir el dropdown */
+.nav-item.dropdown .dropdown-menu {
+  margin-top: 0;
+}
