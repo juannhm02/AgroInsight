@@ -1,13 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import "./index.css";
+// src/index.js
+import 'bootstrap/dist/css/bootstrap.min.css';  //  ← IMPORTAR BOOTSTRAP PRIMERO
+import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter>        {/* ← ÚNICO Router */}
     <App />
   </BrowserRouter>
 );

@@ -159,3 +159,35 @@ body {
 .testimonials-carousel {
   max-width: 100%;
 }
+
+
+/* Ambos halves a pantalla completa */
+.login-half {
+  height: 100vh;
+}
+
+/* Logo centrado y tamaño máximo */
+.login-logo {
+  max-width: 60%;
+}
+
+/* Inputs redondeados y consistentes */
+.form-control.rounded-pill {
+  background-color: var(--secondary);
+  border: none;
+  color: var(--white);
+}
+
+.form-control.rounded-pill::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Botón Acceso con borde y hover */
+.btn-outline-light {
+  border: 2px solid var(--white);
+}
+.btn-outline-light:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--white);
+}
