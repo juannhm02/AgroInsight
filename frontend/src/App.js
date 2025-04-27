@@ -11,6 +11,7 @@ import AdministracionGanadera from './pages/services/ganadera'; // Ejemplo de ru
 import AdministracionCinegetica from './pages/services/cinegetica'; // Ejemplo de ruta interna
 import ControlSaneamientos from './pages/services/saneamientos'; // Ejemplo de ruta interna
 import ModuloFinanciero from './pages/services/financiero'; // Ejemplo de ruta interna
+import Sobre from './pages/Sobre';
 
 function App() {
   return (
@@ -27,8 +28,9 @@ function App() {
         <Route path="/servicios/cinegetica" element={<AdministracionCinegetica />} />
         <Route path="/servicios/saneamientos" element={<ControlSaneamientos />} />
         <Route path="/servicios/financiero" element={<ModuloFinanciero />} />
-        {/* <Route path="/servicios" element={<Servicios />} /> */}
-        {/* ... resto de rutas internas */}
+        <Route path="/sobre"     element={<Sobre />} />
+        {/* <Route path="/contacto"  element={<Contacto />} /> */}
+        {/* <Route path="/perfil"    element={<Perfil />} /> */}
       </Route>
     </Routes>
   );
