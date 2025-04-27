@@ -1,14 +1,15 @@
+// src/components/Layout.jsx
 import React from "react";
+import { Outlet } from "react-router-dom";
 import AppNavbar from "./Navbar";
 import { Container } from "react-bootstrap";
 
-const Layout = ({ children }) => (
+const Layout = () => (
   <>
     <AppNavbar />
     <Container fluid className="p-0">
-      {children}
+      <Outlet /> {/* Aquí se inyectan Home, Servicios, etc. */}
     </Container>
-    {/* Aquí podrías añadir un Footer si lo necesitas */}
   </>
 );
 

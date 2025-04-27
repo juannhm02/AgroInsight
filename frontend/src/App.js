@@ -18,7 +18,7 @@ function App() {
 
       {/* RUTAS PRIVADAS envueltas en Layout */}
       <Route element={<Layout />}>
-        <Route path="/"         element={<Home />} />
+        <Route path="/home"         element={<Home />} /> 
         {/* <Route path="/servicios" element={<Servicios />} /> */}
         {/* ... resto de rutas internas */}
       </Route>

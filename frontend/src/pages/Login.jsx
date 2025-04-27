@@ -73,7 +73,9 @@ const Login = () => (
               type="submit"
               className="w-100 rounded-pill py-2 fw-bold"
             >
+              <a href="/home" className="text-decoration-none text-white">
               Acceso
+            </a>
             </Button>
           </Form>
         </div>
