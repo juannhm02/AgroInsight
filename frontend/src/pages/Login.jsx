@@ -73,7 +73,7 @@ const Login = () => {
                   className="text-white" 
                 />
                 <a href="/forgot" className="text-secondary">
-                  Has olvidado la contraseña?
+                  ¿Has olvidado la contraseña?
                 </a>
               </Form.Group>
 
