@@ -74,8 +74,8 @@ const Login = () => (
               className="w-100 rounded-pill py-2 fw-bold"
             >
               <a href="/home" className="text-decoration-none text-white">
-              Acceso
-            </a>
+                Acceso
+              </a>
             </Button>
           </Form>
         </div>

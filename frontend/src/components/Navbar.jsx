@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 const AppNavbar = () => (
   <Navbar expand="lg" variant="dark" className="bg-primary">
     <Container>
-      <Navbar.Brand href="/">
+      <Navbar.Brand href="/home">
         <img src="/LOGO_white.png" height="30" alt="AgroInsight" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="main-nav" />
