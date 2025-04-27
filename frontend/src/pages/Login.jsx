@@ -11,7 +11,7 @@ const Login = () => (
           src="/LOGO.png"
           alt="AgroInsight Mini"
           className="position-absolute top-0 start-0 m-3"
-          style={{ width: 80, height: 80 }}
+          style={{ width: 40, height: 40 }}
         />
         {/* logo principal centrado */}
         <div className="m-auto">
@@ -19,7 +19,7 @@ const Login = () => (
             src="/home.png"
             alt="AgroInsight"
             className="img-fluid"
-            style={{ maxWidth: 700 }}
+            style={{ maxWidth: 300 }}
           />
         </div>
       </Col>

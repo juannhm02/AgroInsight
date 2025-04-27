@@ -191,3 +191,9 @@ body {
   border-color: var(--secondary);
   color: var(--white);
 }
+
+/* Modal ancho personalizado */
+.wide-modal .modal-dialog {
+  max-width: 800px; /* Ajusta el ancho deseado */
+  width: 90%; /* Opcional: para que sea responsivo */
+}
