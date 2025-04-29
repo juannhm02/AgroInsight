@@ -147,7 +147,7 @@ const Perfil = () => {
                             <Col sm={8}>{user.dni}</Col>
                           </Row>
                           <Button
-                            variant="outline-primary"
+                            variant="mt-3 btn-alt-explotacion" 
                             onClick={() => setEditing(true)}
                           >
                             <FaEdit className="me-1" />

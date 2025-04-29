@@ -9,6 +9,7 @@ body {
 :root {
   --primary: #1a4c28;
   --secondary: #368d44;
+  --secondary-aux: #a1c93d; 
   --white: #ffffff;
   --black: #000000;
   --grey-light: #c4c4c4;
@@ -208,4 +209,31 @@ body {
 /* Quitamos el pequeño gap que Bootstrap metería al abrir el dropdown */
 .nav-item.dropdown .dropdown-menu {
   margin-top: 0;
+}
+
+/* Hacer que los nav-pills siempre tengan texto blanco */
+.nav-pills .nav-link {
+  color: var(--black) !important;
+}
+
+/* Si quieres que al pasar el ratón también permanezca blanco: */
+.nav-pills .nav-link:hover {
+  color: var(--grey-light) !important;
+}
+
+/* Asegúrate de mantener el fondo verde en la activa */
+.nav-pills .nav-link.active {
+  background-color: var(--secondary) !important;
+}
+
+
+.btn-alt-explotacion {
+  background-color: var(--secondary-aux) !important;
+  border-color: var(--white) !important;
+  color: var(--white) !important;
+}
+
+.btn-alt-explotacion:hover {
+  /* mismo efecto oscuro de Bootstrap */
+  filter: brightness(90%);
 }

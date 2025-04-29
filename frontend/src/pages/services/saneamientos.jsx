@@ -43,7 +43,16 @@ const ControlSaneamientos = () => (
                   <td>{row.tipo}</td>
                   <td>{row.fechaPrevista}</td>
                   <td>
-                    <Button size="sm">Marcar realizado</Button>
+                    <Button
+                      size="sm"
+                      style={{
+                        backgroundColor: "var(--secondary)",
+                        borderColor: "var(--secondary)",
+                        color: "var(--white)"
+                      }}
+                    >
+                      Marcar realizado
+                    </Button>
                   </td>
                 </tr>
               ))}

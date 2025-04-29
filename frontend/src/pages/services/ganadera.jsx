@@ -6,23 +6,24 @@ const explotaciones = [
   {
     id: 1,
     name: "Dehesa del Rey",
-    ganado: ["Crotal 0001", "Crotal 0002", "Crotal 0003"],
+    ganado: ["Vacuno", "Porcino", "Bovino", "Equino", "Caprino"],
   },
   {
     id: 2,
     name: "Alcarria",
-    ganado: ["Crotal 0101", "Crotal 0102"],
-  },
+    ganado: ["Vacuno", "Porcino", "Bovino", "Equino", "Caprino"],  },
   {
     id: 3,
     name: "Majuelo",
-    ganado: ["Crotal 0201", "Crotal 0202", "Crotal 0203"],
-  },
+    ganado: ["Vacuno", "Porcino", "Bovino", "Equino", "Caprino"],  },
   {
     id: 4,
     name: "Laureano",
-    ganado: ["Crotal 0301"],
-  },
+    ganado: ["Vacuno", "Porcino", "Bovino", "Equino", "Caprino"],  },
+  {
+    id: 5,
+    name: "Camino Real",
+    ganado: ["Vacuno", "Porcino", "Bovino", "Equino", "Caprino"],  },
 ];
 
 const AdministracionGanadera = () => (
@@ -48,7 +49,7 @@ const AdministracionGanadera = () => (
       ))}
     </Accordion>
 
-    <Button variant="primary">Dar de alta explotación</Button>
+    <Button variant="success" className="mt-3 btn-alt-explotacion">Dar de alta explotación</Button>
   </Container>
 );
 

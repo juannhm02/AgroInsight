@@ -38,7 +38,7 @@ const AdministracionCinegetica = () => (
       ))}
     </Accordion>
 
-    <Button variant="primary">Dar de alta zona cinegética</Button>
+    <Button variant="sucess" className="mt-3 btn-alt-explotacion">Dar de alta zona cinegética</Button>
   </Container>
 );
 
