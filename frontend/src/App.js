@@ -14,6 +14,8 @@ import ModuloFinanciero from './pages/services/financiero'; // Ejemplo de ruta i
 import Sobre from './pages/Sobre';
 import Contacto from './pages/Contacto';
 import Perfil from './pages/Perfil'; 
+import GanadoList from './pages/services/GanadoList'; // Ejemplo de ruta interna
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
         <Route path="/servicios/cinegetica" element={<AdministracionCinegetica />} />
         <Route path="/servicios/saneamientos" element={<ControlSaneamientos />} />
         <Route path="/servicios/financiero" element={<ModuloFinanciero />} />
+        <Route path="/servicios/ganado/:expId/:tipo" element={<GanadoList />} />
         <Route path="/sobre"     element={<Sobre />} />
         <Route path="/contacto"  element={<Contacto />} />
         <Route path="/perfil"    element={<Perfil />} />
