@@ -1,7 +1,7 @@
 // src/pages/Contacto.jsx
 import React from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaMapSigns } from "react-icons/fa";
 
 const Contacto = () => (
   <Container className="py-5">
@@ -62,8 +62,13 @@ const Contacto = () => (
       <Col md={5}>
         <h4 className="mb-4">Nuestra oficina</h4>
         <div className="mb-4">
+
+          <FaMapSigns size={24} className="me-2 text-secondary" />
+          <span>Campus de Rabanales. Universidad de Córdoba </span>
+        </div>
+        <div className="mb-4">
           <FaMapMarkerAlt size={24} className="me-2 text-secondary" />
-          <span>C/ Agricultura, 12 – 14004 Córdoba, España</span>
+          <span>N-IV, km 396, 14014 Córdoba </span>
         </div>
         <div className="mb-4">
           <FaEnvelope size={24} className="me-2 text-secondary" />
@@ -73,17 +78,17 @@ const Contacto = () => (
           <FaPhone size={24} className="me-2 text-secondary" />
           <span>+34 957 00 12 34</span>
         </div>
-        {/* Mapa embebido (opcional) */}
+        {/* Mapa embebido */}
         <div className="mt-5">
           <iframe
-            title="Ubicación AgroInsight"
-            src="https://www.google.com/maps/embed?pb=!1m18..."
-            width="100%"
-            height="200"
-            style={{ border: 0, borderRadius: "0.5rem" }}
-            allowFullScreen=""
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50380.92146816362!2d-4.855656623840358!3d37.88818215027996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6d20924ad6b75b%3A0x8cb499e9645d592e!2sCampus%20de%20Rabanales.%20Universidad%20de%20C%C3%B3rdoba!5e0!3m2!1ses!2ses!4v1747812057216!5m2!1ses!2ses"
+            width="600"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen
             loading="lazy"
-          />
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </Col>
     </Row>
