@@ -50,8 +50,8 @@ const datosDeEjemplo = {
     ],
     /* … otros tipos si los hubiera */
   },
-  /* … otras explotaciones */
-};
+    /* … otras explotaciones */
+  };
 
 const ListaGanado = () => {
   const { expId, tipo } = useParams();
@@ -110,8 +110,43 @@ const ListaGanado = () => {
     setShowModal(false);
   };
 
-  return (
-    <Container className="py-5">
+  // State for "Alta Ganado Modal"
+  const [showNewAnimalModal, setShowNewAnimalModal] = useState(false);
+  const [newAnimal, setNewAnimal] = useState({
+    tipo: "",
+    crotal: "",
+    sexo: "",
+    edad: "",
+    fechaCompra: "",
+    peso: "",
+    raza: "",
+    cria: "",
+    proximoParto: "",
+  });
+  const [showPrintModal, setShowPrintModal] = useState(false);
+  const [printFilters, setPrintFilters] = useState({ sexo: "", edad: "", year: "", raza: "" });
+  const handleShowPrintModal = () => setShowPrintModal(true);
+  const handleClosePrintModal = () => setShowPrintModal(false);
+  const handlePrintFilterChange = (e) => {
+    const { name, value } = e.target;
+    setPrintFilters(prev => ({ ...prev, [name]: value }));
+  };
+  const allGanadoTypes = ["vacuno", "porcino", "ovino"]; // Example types
+  
+  const handleNewAnimalChange = (e) => {
+    const { name, value } = e.target;
+    setNewAnimal((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePrintListado = () => {
+    handleClosePrintModal();
+    // dejamos que el modal termine de cerrarse antes de imprimir
+    setTimeout(() => window.print(), 100);
+  };
+  
+    return (
+      <React.Fragment>
+      <Container className="py-5">
       <h1 className="mb-4">
         Explotación «{nombreExp}» –{" "}
         {tipo.charAt(0).toUpperCase() + tipo.slice(1)}
@@ -172,6 +207,16 @@ const ListaGanado = () => {
           </Card>
 
           <Card className="p-3 mb-3">
+            <h5 className="mb-3">Gestión ganado</h5>
+            <Button variant="success" className="mt-3 btn-alt-explotacion" onClick={() => setShowNewAnimalModal(true)}>
+              Dar de alta ganado
+            </Button>
+            <Button variant="success" className="mt-3 btn-alt-explotacion" onClick={handleShowPrintModal}>
+              Imprimir listado
+            </Button>
+          </Card>
+
+          <Card className="p-3 mb-3">
             <h5 className="mb-3">Seleccione crotal a eliminar</h5>
             <Form.Group controlId="selCrotal" className="mb-3">
               <Form.Label>Crotal</Form.Label>
@@ -197,7 +242,7 @@ const ListaGanado = () => {
 
         {/* Tabla de resultados */}
         <Col md={9}>
-          <Table bordered hover responsive className="bg-white">
+          <Table striped bordered hover responsive className="bg-white" id="ganado-table">
             <thead>
               <tr>
                 <th>Nº de crotal</th>
@@ -227,27 +272,204 @@ const ListaGanado = () => {
           </Table>
         </Col>
       </Row>
-
-      {/* Modal de confirmación para dar de baja */}
-      <Modal show={showModal} onHide={handleCloseModal} centered>
-        <Modal.Header closeButton style={{ backgroundColor: "#f8d7da" }}>
-          <Modal.Title style={{ color: "#721c24" }}>
-            Confirmar baja de ganado
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "#f8d7da", color: "#721c24" }}>
-          ¿Estás seguro de que quieres dar de baja el animal con crotal “{selCrotal}”?
-        </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: "#f8d7da" }}>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={handleConfirmDelete}>
-            Confirmar baja
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </Container>
+
+    {/* Modal de confirmación para dar de baja */}
+    <Modal show={showModal} onHide={handleCloseModal} centered>
+      <Modal.Header closeButton style={{ backgroundColor: "#f8d7da" }}>
+        <Modal.Title style={{ color: "#721c24" }}>
+          Confirmar baja de ganado
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{ backgroundColor: "#f8d7da", color: "#721c24" }}>
+        ¿Estás seguro de que quieres dar de baja el animal con crotal “{selCrotal}”?
+      </Modal.Body>
+      <Modal.Footer style={{ backgroundColor: "#f8d7da" }}>
+        <Button variant="secondary" onClick={handleCloseModal}>
+          Cancelar
+        </Button>
+        <Button variant="danger" onClick={handleConfirmDelete}>
+          Confirmar baja
+        </Button>
+      </Modal.Footer>
+    </Modal>
+
+    {/* Alta Ganado Modal */}
+    <Modal
+    show={showNewAnimalModal}
+    onHide={() => setShowNewAnimalModal(false)}
+    centered
+  >
+    <Modal.Header closeButton>
+      <Modal.Title>Alta Ganado</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Form>
+        <Form.Group controlId="animalTipo" className="mb-3">
+          <Form.Label>Tipo de Ganado*</Form.Label>
+          <Form.Control
+            as="select"
+            name="tipo"
+            value={newAnimal.tipo}
+            onChange={handleNewAnimalChange}
+          >
+            <option value="">Selecciona tipo</option>
+            {allGanadoTypes.map(g => (
+              <option key={g} value={g}>{g}</option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="animalCrotal" className="mb-3">
+          <Form.Label>Nº de crotal*</Form.Label>
+          <Form.Control
+            type="text"
+            name="crotal"
+            value={newAnimal.crotal}
+            onChange={handleNewAnimalChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="animalSexo" className="mb-3">
+          <Form.Label>Sexo*</Form.Label>
+          <Form.Control
+            as="select"
+            name="sexo"
+            value={newAnimal.sexo}
+            onChange={handleNewAnimalChange}
+          >
+            <option value="">Selecciona sexo</option>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="animalEdad" className="mb-3">
+          <Form.Label>Edad*</Form.Label>
+          <Form.Control
+            type="text"
+            name="edad"
+            value={newAnimal.edad}
+            onChange={handleNewAnimalChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="animalFechaCompra" className="mb-3">
+          <Form.Label>Fecha de compra*</Form.Label>
+          <Form.Control
+            type="date"
+            name="fechaCompra"
+            value={newAnimal.fechaCompra}
+            onChange={handleNewAnimalChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="animalPeso" className="mb-3">
+          <Form.Label>Peso*</Form.Label>
+          <Form.Control
+            type="text"
+            name="peso"
+            value={newAnimal.peso}
+            onChange={handleNewAnimalChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="animalRaza" className="mb-3">
+          <Form.Label>Raza*</Form.Label>
+          <Form.Control
+            type="text"
+            name="raza"
+            value={newAnimal.raza}
+            onChange={handleNewAnimalChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="animalCria" className="mb-3">
+          <Form.Label>Cría</Form.Label>
+          <Form.Control
+            as="select"
+            name="cria"
+            value={newAnimal.cria}
+            onChange={handleNewAnimalChange}
+          >
+            <option value="">Sin cría</option>
+            {/* Placeholder: populate with existing crotales */}
+            <option value="0001">0001</option>
+            <option value="0002">0002</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="animalProximoParto" className="mb-3">
+          <Form.Label>Próximo parto</Form.Label>
+          <Form.Control
+            type="date"
+            name="proximoParto"
+            value={newAnimal.proximoParto}
+            onChange={handleNewAnimalChange}
+          />
+        </Form.Group>
+      </Form>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={() => setShowNewAnimalModal(false)}>
+        Cancelar
+      </Button>
+      <Button variant="success" onClick={() => setShowNewAnimalModal(false)}>
+        Crear Ganado
+      </Button>
+    </Modal.Footer>
+  </Modal>
+
+  {/* Modal de impresión de listado */}
+  <Modal show={showPrintModal} onHide={handleClosePrintModal} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>Imprimir listado</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Form>
+        <Form.Group controlId="printSexo" className="mb-3">
+          <Form.Label>Sexo</Form.Label>
+          <Form.Select name="sexo" value={printFilters.sexo} onChange={handlePrintFilterChange}>
+            <option value="">Todos</option>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group controlId="printEdad" className="mb-3">
+          <Form.Label>Edad</Form.Label>
+          <Form.Control
+            type="text"
+            name="edad"
+            placeholder="Ej. 2 años"
+            value={printFilters.edad}
+            onChange={handlePrintFilterChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="printYear" className="mb-3">
+          <Form.Label>Año de compra</Form.Label>
+          <Form.Control
+            type="number"
+            name="year"
+            placeholder="Ej. 2023"
+            value={printFilters.year}
+            onChange={handlePrintFilterChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="printRaza" className="mb-3">
+          <Form.Label>Raza</Form.Label>
+          <Form.Select name="raza" value={printFilters.raza} onChange={handlePrintFilterChange}>
+            <option value="">Todas</option>
+            {razas.map(race => (
+              <option key={race} value={race}>
+                {race}
+              </option>
+            ))}
+          </Form.Select>
+        </Form.Group>
+      </Form>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleClosePrintModal}>
+        Cancelar
+      </Button>
+      <Button variant="success" onClick={handlePrintListado}>
+        Imprimir
+      </Button>
+    </Modal.Footer>
+  </Modal>
+  </React.Fragment>
   );
 };
 

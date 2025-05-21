@@ -27,7 +27,7 @@ const ControlSaneamientos = () => (
       </Nav>
       <Tab.Content>
         <Tab.Pane eventKey="pendientes">
-          <Table striped bordered hover>
+          <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th>Animal</th>
@@ -60,7 +60,7 @@ const ControlSaneamientos = () => (
           </Table>
         </Tab.Pane>
         <Tab.Pane eventKey="historico">
-          <Table striped bordered hover>
+          <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th>Animal</th>

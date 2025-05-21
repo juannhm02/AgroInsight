@@ -29,7 +29,6 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/"         element={<Home />} /> 
         <Route path="/servicios/ganadera" element={<AdministracionGanadera />} />
-        <Route path="/servicios/cinegetica" element={<AdministracionCinegetica />} />
         <Route path="/servicios/saneamientos" element={<ControlSaneamientos />} />
         <Route path="/servicios/financiero" element={<ModuloFinanciero />} />
         <Route path="/servicios/ganado/:expId/:tipo" element={<GanadoList />} />

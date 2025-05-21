@@ -44,15 +44,6 @@ const AppNavbar = () => (
                 <hr className="dropdown-divider border-light my-1" />
               </li>
               <li>
-                <Nav.Link
-                  href="/servicios/cinegetica"
-                  style={{ width: "220px" }}
-                  className="dropdown-item text-white"
-                >
-                  Administración cinegética
-                </Nav.Link>
-              </li>
-              <li>
                 <hr className="dropdown-divider border-light my-1" />
               </li>
               <li>
@@ -76,6 +67,7 @@ const AppNavbar = () => (
                   Modulo financiero
                 </Nav.Link>
               </li>
+              
             </ul>
           </Nav.Item>
 

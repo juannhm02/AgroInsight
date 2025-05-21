@@ -237,3 +237,20 @@ body {
   /* mismo efecto oscuro de Bootstrap */
   filter: brightness(90%);
 }
+
+/* ---------- imprimir sólo la tabla de ganado ---------- */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #ganado-table,
+  #ganado-table * {
+    visibility: visible !important;
+  }
+  #ganado-table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
