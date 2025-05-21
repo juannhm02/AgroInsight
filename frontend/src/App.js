@@ -8,7 +8,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import AdministracionGanadera from './pages/services/ganadera'; // Ejemplo de ruta interna
-import AdministracionCinegetica from './pages/services/cinegetica'; // Ejemplo de ruta interna
 import ControlSaneamientos from './pages/services/saneamientos'; // Ejemplo de ruta interna
 import ModuloFinanciero from './pages/services/financiero'; // Ejemplo de ruta interna
 import Sobre from './pages/Sobre';

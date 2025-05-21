@@ -131,11 +131,27 @@ const ListaGanado = () => {
     const { name, value } = e.target;
     setPrintFilters(prev => ({ ...prev, [name]: value }));
   };
-  const allGanadoTypes = ["vacuno", "porcino", "ovino"]; // Example types
-  
+  const allGanadoTypes = ["vacuno", "porcino", "caprino", "bovino", "equino"]; // Example types
+
   const handleNewAnimalChange = (e) => {
     const { name, value } = e.target;
     setNewAnimal((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCreateAnimal = () => {
+    setListaActual(prev => [...prev, newAnimal]);
+    setNewAnimal({
+      tipo: "",
+      crotal: "",
+      sexo: "",
+      edad: "",
+      fechaCompra: "",
+      peso: "",
+      raza: "",
+      cria: "",
+      proximoParto: "",
+    });
+    setShowNewAnimalModal(false);
   };
 
   const handlePrintListado = () => {
@@ -305,7 +321,7 @@ const ListaGanado = () => {
     </Modal.Header>
     <Modal.Body>
       <Form>
-        <Form.Group controlId="animalTipo" className="mb-3">
+        {/* <Form.Group controlId="animalTipo" className="mb-3">
           <Form.Label>Tipo de Ganado*</Form.Label>
           <Form.Control
             as="select"
@@ -318,7 +334,7 @@ const ListaGanado = () => {
               <option key={g} value={g}>{g}</option>
             ))}
           </Form.Control>
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group controlId="animalCrotal" className="mb-3">
           <Form.Label>Nº de crotal*</Form.Label>
           <Form.Control
@@ -406,7 +422,7 @@ const ListaGanado = () => {
       <Button variant="secondary" onClick={() => setShowNewAnimalModal(false)}>
         Cancelar
       </Button>
-      <Button variant="success" onClick={() => setShowNewAnimalModal(false)}>
+      <Button variant="success" onClick={handleCreateAnimal}>
         Crear Ganado
       </Button>
     </Modal.Footer>
