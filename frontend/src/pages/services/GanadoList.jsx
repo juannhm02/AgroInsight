@@ -11,6 +11,7 @@ import {
   Button,
   Modal,
 } from "react-bootstrap";
+import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
 
 // Datos de ejemplo; en producción vendrían de tu API
 const explotaciones = [
@@ -125,6 +126,22 @@ const ListaGanado = () => {
   });
   const [showPrintModal, setShowPrintModal] = useState(false);
   const [printFilters, setPrintFilters] = useState({ sexo: "", edad: "", year: "", raza: "" });
+  const [editingId, setEditingId] = useState("");
+  const [editedData, setEditedData] = useState({});
+  const handleEditClick = (crotal, item) => {
+    setEditingId(crotal);
+    setEditedData({ ...item });
+  };
+  const handleCancelEdit = () => {
+    setEditingId("");
+    setEditedData({});
+  };
+  const handleSaveEdit = () => {
+    // TODO: call API to persist editedData for editingId
+    setListaActual(prev => prev.map(row => row.crotal === editingId ? editedData : row));
+    setEditingId("");
+    setEditedData({});
+  };
   const handleShowPrintModal = () => setShowPrintModal(true);
   const handleClosePrintModal = () => setShowPrintModal(false);
   const handlePrintFilterChange = (e) => {
@@ -170,7 +187,16 @@ const ListaGanado = () => {
 
       <Row>
         {/* Filtros y botón de baja */}
-        <Col md={3}>
+        <Col md={2}>
+        <Card className="p-3 mb-3">
+            <h5 className="mb-3">Gestión ganado</h5>
+            <Button variant="success" className="mt-3 btn-alt-explotacion" onClick={() => setShowNewAnimalModal(true)}>
+              Alta ganado
+            </Button>
+            <Button variant="success" className="mt-3 btn-alt-explotacion" onClick={handleShowPrintModal}>
+              Imprimir listado
+            </Button>
+          </Card>
           <Card className="p-3 mb-3">
             <h5 className="mb-3">Filtrar por</h5>
 
@@ -221,39 +247,6 @@ const ListaGanado = () => {
               </Form.Select>
             </Form.Group>
           </Card>
-
-          <Card className="p-3 mb-3">
-            <h5 className="mb-3">Gestión ganado</h5>
-            <Button variant="success" className="mt-3 btn-alt-explotacion" onClick={() => setShowNewAnimalModal(true)}>
-              Dar de alta ganado
-            </Button>
-            <Button variant="success" className="mt-3 btn-alt-explotacion" onClick={handleShowPrintModal}>
-              Imprimir listado
-            </Button>
-          </Card>
-
-          <Card className="p-3 mb-3">
-            <h5 className="mb-3">Seleccione crotal a eliminar</h5>
-            <Form.Group controlId="selCrotal" className="mb-3">
-              <Form.Label>Crotal</Form.Label>
-              <Form.Select
-                value={selCrotal}
-                onChange={e => setSelCrotal(e.target.value)}
-              >
-                <option value="">Selecciona una opción</option>
-                {listaActual.map(item => (
-                  <option key={item.crotal} value={item.crotal}>
-                    {item.crotal}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-            <div className="text-center">
-              <Button variant="danger" onClick={handleShowModal}>
-                Dar de baja ganado
-              </Button>
-            </div>
-          </Card>
         </Col>
 
         {/* Tabla de resultados */}
@@ -267,21 +260,125 @@ const ListaGanado = () => {
                 <th>Fecha de compra</th>
                 <th>Peso</th>
                 <th>Raza</th>
-                <th>Cría</th>
+                <th>Madre</th>
                 <th>Próximo parto</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {listaFiltrada.map((item, idx) => (
                 <tr key={idx}>
-                  <td>{item.crotal}</td>
-                  <td>{item.sexo}</td>
-                  <td>{item.edad}</td>
-                  <td>{item.fechaCompra}</td>
-                  <td>{item.peso}</td>
-                  <td>{item.raza}</td>
-                  <td>{item.cria}</td>
-                  <td>{item.proximoParto}</td>
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="text"
+                        value={editedData.crotal}
+                        onChange={e => setEditedData(prev => ({ ...prev, crotal: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.crotal}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Select
+                        value={editedData.sexo}
+                        onChange={e => setEditedData(prev => ({ ...prev, sexo: e.target.value }))}
+                      >
+                        <option value="Macho">Macho</option>
+                        <option value="Hembra">Hembra</option>
+                      </Form.Select>
+                    </td>
+                  ) : (
+                    <td>{item.sexo}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="text"
+                        value={editedData.edad}
+                        onChange={e => setEditedData(prev => ({ ...prev, edad: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.edad}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="date"
+                        value={editedData.fechaCompra}
+                        onChange={e => setEditedData(prev => ({ ...prev, fechaCompra: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.fechaCompra}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="text"
+                        value={editedData.peso}
+                        onChange={e => setEditedData(prev => ({ ...prev, peso: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.peso}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="text"
+                        value={editedData.raza}
+                        onChange={e => setEditedData(prev => ({ ...prev, raza: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.raza}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="text"
+                        value={editedData.cria}
+                        onChange={e => setEditedData(prev => ({ ...prev, cria: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.cria}</td>
+                  )}
+                  {editingId === item.crotal ? (
+                    <td>
+                      <Form.Control
+                        type="date"
+                        value={editedData.proximoParto}
+                        onChange={e => setEditedData(prev => ({ ...prev, proximoParto: e.target.value }))}
+                      />
+                    </td>
+                  ) : (
+                    <td>{item.proximoParto}</td>
+                  )}
+                  <td className="text-center">
+                    {editingId === item.crotal ? (
+                      <>
+                        <Button variant="success" size="sm" onClick={handleSaveEdit}>
+                          <FaCheck />
+                        </Button>{" "}
+                        <Button variant="outline-secondary" size="sm" onClick={handleCancelEdit}>
+                          <FaTimes />
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button variant="outline-primary" size="sm" onClick={() => handleEditClick(item.crotal, item)}>
+                          <FaEdit />
+                        </Button>{" "}
+                        <Button variant="danger" size="sm" onClick={() => { setSelCrotal(item.crotal); handleShowModal(); }}>
+                          <FaTrash />
+                        </Button>
+                      </>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

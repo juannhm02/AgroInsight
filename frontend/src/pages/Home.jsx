@@ -15,7 +15,6 @@ const slides = [
   "/carrusel/Slide2.png",
   "/carrusel/Slide3.png",
   "/carrusel/Slide4.png",
-  "/carrusel/Slide5.png",
   "/carrusel/Slide6.png",
 ];
 
