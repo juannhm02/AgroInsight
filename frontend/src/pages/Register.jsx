@@ -1,11 +1,99 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
 const Register = () => {
+  const navigate = useNavigate();
   const [showTerms, setShowTerms] = useState(false);
+  const [termsChecked, setTermsChecked] = useState(false);
 
   const handleShowTerms = () => setShowTerms(true);
   const handleCloseTerms = () => setShowTerms(false);
+
+  const [formValues, setFormValues] = useState({
+    username: "",
+    location: "",
+    dni: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  const validateField = (name, value) => {
+    let error;
+    switch (name) {
+      case "username":
+      case "location":
+        if (!value.trim()) {
+          error = "Este campo es obligatorio";
+        } else if (!nameRegex.test(value)) {
+          error = "Solo letras y espacios";
+        }
+        break;
+      case "dni":
+        if (!/^[0-9]{8}[A-Za-z]$/.test(value)) error = "DNI inválido";
+        break;
+      case "email":
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Email inválido";
+        break;
+      case "password":
+        if (value.length < 6) error = "Mínimo 6 caracteres";
+        break;
+      case "confirm":
+        if (value !== formValues.password) error = "No coincide";
+        break;
+      default:
+    }
+    return error;
+  };
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({ ...prev, [name]: value }));
+    if (touched[name]) {
+      setFormErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    }
+  };
+  const handleBlur = e => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    setFormErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+  };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const errors = {};
+    Object.keys(formValues).forEach(key => {
+      const err = validateField(key, formValues[key]);
+      if (err) errors[key] = err;
+    });
+    if (!termsChecked) {
+      errors.terms = "Debes aceptar los términos";
+    }
+    setFormErrors(errors);
+    setTouched(prev => ({ ...prev, ...Object.keys(formValues).reduce((a, k) => ({ ...a, [k]: true }), {}), terms: true }));
+    if (Object.keys(errors).length === 0) {
+      try {
+        const response = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formValues),
+        });
+        if (response.status === 201) {
+          navigate("/login");
+        } else {
+          const data = await response.json();
+          alert(data.message || "Error en el registro");
+        }
+      } catch (error) {
+        alert("Error en el registro");
+      }
+    }
+  };
 
   return (
     <Container fluid className="p-0">
@@ -33,36 +121,56 @@ const Register = () => {
         >
           <div className="w-75">
             <h2 className="mb-4">Crea tu cuenta</h2>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               {[
-                { id: "username", placeholder: "Nombre de usuario" },
-                { id: "location", placeholder: "Localidad" },
-                { id: "farms", placeholder: "Número de explotaciones" },
-                { id: "dni", placeholder: "DNI" },
-                { id: "email", placeholder: "Email" },
-              ].map(({ id, placeholder }) => (
+                { id: "username", label: "Nombre de usuario", placeholder: "Nombre de usuario" },
+                { id: "location", label: "Localidad", placeholder: "Localidad" },
+                { id: "dni", label: "DNI", placeholder: "DNI" },
+                { id: "email", label: "Email", placeholder: "Email" },
+              ].map(({ id, label, placeholder }) => (
                 <Form.Group controlId={id} className="mb-3" key={id}>
+                  <Form.Label>{label} <span className="text-danger">*</span></Form.Label>
                   <Form.Control
                     type="text"
+                    name={id}
                     placeholder={placeholder}
+                    value={formValues[id]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched[id] && !!formErrors[id]}
                     className="rounded-pill bg-secondary bg-opacity-50 border-0 text-white"
                   />
+                  <Form.Control.Feedback type="invalid">{formErrors[id]}</Form.Control.Feedback>
                 </Form.Group>
               ))}
 
               <Form.Group controlId="password" className="mb-3">
+                <Form.Label>Contraseña <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="password"
+                  name="password"
                   placeholder="Contraseña"
+                  value={formValues.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  isInvalid={touched.password && !!formErrors.password}
                   className="rounded-pill bg-secondary bg-opacity-50 border-0 text-white"
                 />
+                <Form.Control.Feedback type="invalid">{formErrors.password}</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="confirm" className="mb-3">
+                <Form.Label>Confirmar Contraseña <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="password"
+                  name="confirm"
                   placeholder="Confirmar Contraseña"
+                  value={formValues.confirm}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  isInvalid={touched.confirm && !!formErrors.confirm}
                   className="rounded-pill bg-secondary bg-opacity-50 border-0 text-white"
                 />
+                <Form.Control.Feedback type="invalid">{formErrors.confirm}</Form.Control.Feedback>
               </Form.Group>
 
               <p>
@@ -80,7 +188,11 @@ const Register = () => {
                 type="checkbox"
                 label="Acepto los términos y condiciones"
                 className="mb-4 text-white"
+                checked={termsChecked}
+                onChange={e => setTermsChecked(e.target.checked)}
+                isInvalid={!termsChecked && touched['terms']}
               />
+              <Form.Control.Feedback type="invalid">Debes aceptar los términos</Form.Control.Feedback>
 
               <Button
                 variant="outline-light"

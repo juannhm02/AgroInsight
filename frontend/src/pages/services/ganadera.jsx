@@ -124,7 +124,7 @@ const AdministracionGanadera = () => {
               onChange={(e) => setFilterResp(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="filterCrotal">
+          {/* <Form.Group controlId="filterCrotal">
             <Form.Label>Nº de crotal</Form.Label>
             <Form.Control
               type="text"
@@ -132,7 +132,7 @@ const AdministracionGanadera = () => {
               value={filterCrotal}
               onChange={(e) => setFilterCrotal(e.target.value)}
             />
-          </Form.Group>
+          </Form.Group> */}
         </Form>
 
         {/* Delete Button */}
